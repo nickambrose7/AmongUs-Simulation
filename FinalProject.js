@@ -1,4 +1,10 @@
+/*
+Final Project
+Section: 01
+Group #: 4
 
+Names: Nick Ambrose, Advaitha Bhavanasi, Diana Koralski, Murat Oney
+*/
 
 // character variables
 var charX = 0;
