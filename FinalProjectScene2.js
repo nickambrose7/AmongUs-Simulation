@@ -57,10 +57,38 @@ function drawCenter()
 //Global Variables
 count = 0
 
-function setup() {
+function setup() 
+{
 	createCanvas(400, 400);
 }
+
+function draw()
+{
+	background(0);
+	backgroundScene();
+	count ++;
+}
 	
+function backgroundScene()
+{
+
+   if (count < 50)
+   {
+   	 //background(255);
+     backgroundVersion1();
+   }
+
+   else if (count >= 50 && count <200)
+   {
+   	  backgroundVersion2();
+   }
+
+   else if (count >= 200)
+   {
+   	  backgroundVersion3();
+   }
+}
+
 //character
 function drawCharacter(x, y, z, scal1, scal2)
 {
@@ -168,9 +196,30 @@ function drawTable()
 
 }
 
-function draw() 
+function backgroundVersion1()
 {
-	count ++
+	background(255);
+	//mini banner character
+	push();
+		translate(0,0)
+		drawCharacter(250,246,35,0.5,0.5);
+	pop();
+	//banner
+	fill(255,0,0);
+	noStroke();
+	rect(0,200,400,100);
+	fill(200);
+	ellipse(200,200,200,100);
+	textSize(25);
+	fill(100);
+	strokeWeight(1);
+	stroke(0,0,255);
+	text('EMERGENCY MEETING',190,200);
+
+}
+
+function backgroundVersion2() 
+{
 	background(50)
 	//floor
 	push();
@@ -185,7 +234,7 @@ function draw()
  	//red
  	push();
  		translate(-100, 10);
- 		drawCharacter(255, 0, 0);
+ 		drawCharacter(255, 0, 0, 1, 1);
  	pop();
  	//lime
  	push();
@@ -214,4 +263,96 @@ function draw()
  		characterBacks(0, 0, 255);
  	pop();
 
+}
+
+function backgroundVersion3()
+{
+	background(50)
+	//floor
+	push();
+		fill(154, 164, 199);
+		rect(0, 260, 400, 200)
+	pop();
+	drawGrid();
+ 	drawCenter();
+ 	stroke(0);
+
+ 	//charcters behind table
+ 	//red
+ 	push();
+ 		translate(-100, 10);
+ 		drawCharacter(255, 0, 0, 1, 1);
+ 	pop();
+ 	//lime
+ 	push();
+ 		translate(30, 0);
+ 		drawCharacter(69, 245, 56, -1, 1);
+ 	pop();
+ 	// yellow
+ 	push();
+ 		translate(120, 10);
+ 		drawCharacter(250, 246, 35, -1, 1);
+ 	pop();
+
+	drawTable();
+
+	//characters in front of table (with backs to us)
+	//purple
+	push();
+ 		translate(-200, 10);
+ 		scale(1.3)
+ 		characterBacks(166, 75, 191);
+ 	pop();
+	//blue
+	push();
+ 		translate(0, 10);
+ 		scale(1.3)
+ 		characterBacks(0, 0, 255);
+ 	pop();
+
+ 	//vote Lime Out button
+ 	fill(255);
+ 	rect(250,0,150,50);
+ 	fill(0);
+    textSize(20);
+    text('VOTE LIME OUT', 260,10);
+
+
+}
+
+//text (purple)
+//fill(255);
+//rect(150,300,100,50);
+//fill(0);
+//textsize(10);
+//text('I was in the engine room, it wasn't me', 155,310);
+
+//text (blue)
+// 	fill(255);
+// 	rect(200,300,100,50);
+// 	fill(0);
+//   textSize(10);
+//   text('I saw Lime there, I think it was him!', 205,310);
+
+//text(yellow)
+//fill(255);
+//rect(300,150,100,50);
+//fill(0);
+//textSize(10);
+//text('Yea, Lime looks sus let's eject Lime', 305, 160);
+
+//text(yellow)
+//fill(255);
+//rect(100,150,100,50);
+//fill(0);
+//textSize(10);
+//text('It wasn't me, I left the room!', 105, 160);
+
+function mouseClicked()
+{
+	//scene change to scene 3 if you click the "Vote Lime Out" button
+   	if (mouseX > 250 && mouseX < 400 && mouseY > 0 && mouseY < 50)
+   	{
+    	//scenechange = true;
+    }
 }
