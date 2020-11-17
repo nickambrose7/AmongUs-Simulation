@@ -2,6 +2,12 @@ var cyanVisible = true
 var xRed = -100
 var stateC = 2;
 
+var accX = 0;//controls movement
+var accY = 0;
+
+var nx = 20; //starting postion of the orange character that Nick will update causeing movement
+var ny = 50;
+
 function setup() {
   createCanvas(400, 400);
 }
@@ -257,11 +263,64 @@ function mouseClicked(event)
 		cyanVisible = false;
 	}
 
+function checkKeys()
+{
+	
+	//x movement
+	
+	if (keyIsDown(RIGHT_ARROW))
+	{
+		accX = 1;
+	}
+	else
+	{
+		accX = 0;
+	}
+	if (keyIsDown(LEFT_ARROW))
+	{
+		accX = -1;
+	}
+	else
+	{
+		accX = 0;
+	}
+
+	//y movement
+	if (keyIsDown(DOWN_ARROW))
+	{
+		accY = 1;
+	}
+	else
+	{
+		accY = 0;
+	}
+	if (keyIsDown(UP_ARROW))
+	{
+		accY = -1;
+	}
+	else
+	{
+		accY = 0;
+	}
+}
+
+function updateorange()
+{
+	nx += accX;
+	ny += accY;
+}
+
+
+
+
 
 function draw() {
 	background(36,50,59)
 	scene();
-	drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
+	drawCharacter(nx, ny, 255, 128, 0, .7, .7) //this is Nick's character that I want to move
+	// drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
+	checkKeys();
+	updateorange();
 	drawCharacter(250, 300, 0, 0, 200, .7, .7)
 	
 	draw_kill_button()
