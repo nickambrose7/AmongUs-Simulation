@@ -1,61 +1,61 @@
-let INC = 50;
-//hi
+// let INC = 50;
+// //hi
 
-function drawGrid()
-{
- // horizontal
- for (i = 0; i < width; i+=INC)
- {
+// function drawGrid()
+// {
+//  // horizontal
+//  for (i = 0; i < width; i+=INC)
+//  {
 
-  if(i % (INC*2) == 0)
-  {
-   stroke(0);
-   fill(0);
-   text(i, 10, i);
-   strokeWeight(2);
-  }
-  else
-  {
-   strokeWeight(1);
-  }
-  stroke(0, 0, 255);
-  line(0, i, width, i);
+//   if(i % (INC*2) == 0)
+//   {
+//    stroke(0);
+//    fill(0);
+//    text(i, 10, i);
+//    strokeWeight(2);
+//   }
+//   else
+//   {
+//    strokeWeight(1);
+//   }
+//   stroke(0, 0, 255);
+//   line(0, i, width, i);
 
- }
+//  }
 
- //vertical
- for (i = 0; i < height; i+=INC)
- {
+//  //vertical
+//  for (i = 0; i < height; i+=INC)
+//  {
 
-  if(i % (INC*2) == 0)
-  {
-   stroke(0);
-   fill(0);
-   text(i, i, 10);
-   strokeWeight(2);
-  }
-  else
-  {
-   strokeWeight(1);
-  }
-  stroke(255, 0, 255);
-  line(i, 0, i, height);
- }
-}
-function drawCenter()
-{
- noStroke();
- fill(0);
- ellipse(width / 2, height / 2, 10, 10);
- stroke(0);
- fill(0);
- text("(" + width / 2 + ", " + height / 2 + ")", width / 2 + 10, height / 2 + 10);
-}
-
+//   if(i % (INC*2) == 0)
+//   {
+//    stroke(0);
+//    fill(0);
+//    text(i, i, 10);
+//    strokeWeight(2);
+//   }
+//   else
+//   {
+//    strokeWeight(1);
+//   }
+//   stroke(255, 0, 255);
+//   line(i, 0, i, height);
+//  }
+// }
+// function drawCenter()
+// {
+//  noStroke();
+//  fill(0);
+//  ellipse(width / 2, height / 2, 10, 10);
+//  stroke(0);
+//  fill(0);
+//  text("(" + width / 2 + ", " + height / 2 + ")", width / 2 + 10, height / 2 + 10);
+// }
 
 
 //Global Variables
 count = 0
+//scenechange = false;
 
 function setup() 
 {
@@ -72,18 +72,18 @@ function draw()
 function backgroundScene()
 {
 
-   if (count < 50)
+   if (count < 100)
    {
    	 //background(255);
      backgroundVersion1();
    }
 
-   else if (count >= 50 && count <200)
+   else if (count >= 100 && count <800)
    {
    	  backgroundVersion2();
    }
 
-   else if (count >= 200)
+   else if (count >= 800)
    {
    	  backgroundVersion3();
    }
@@ -123,6 +123,7 @@ function drawCharacter(x, y, z, scal1, scal2)
 	pop();
 }
 
+//characterbacks
 function characterBacks(x, y, z)
 {
 	push();
@@ -142,6 +143,7 @@ function characterBacks(x, y, z)
 	pop();
 }
 
+//centraltable
 function drawTable()
 {
 	//legs
@@ -196,28 +198,31 @@ function drawTable()
 
 }
 
+//emergency meeting alert
 function backgroundVersion1()
 {
-	background(255);
+	background(230);
 	//mini banner character
 	push();
-		translate(0,0)
-		drawCharacter(250,246,35,0.5,0.5);
+		translate(-20,-100)
+		stroke(0);
+		drawCharacter(250,246,35,0.8,0.8);
 	pop();
 	//banner
 	fill(255,0,0);
 	noStroke();
-	rect(0,200,400,100);
-	fill(200);
+	rect(0,150,400,100);
+	fill(190);
 	ellipse(200,200,200,100);
 	textSize(25);
 	fill(100);
-	strokeWeight(1);
+	strokeWeight(2);
 	stroke(0,0,255);
-	text('EMERGENCY MEETING',190,200);
+	text('EMERGENCY \n MEETING',123,195);
 
 }
 
+//characters conversing who to eject
 function backgroundVersion2() 
 {
 	background(50)
@@ -226,8 +231,8 @@ function backgroundVersion2()
 		fill(154, 164, 199);
 		rect(0, 260, 400, 200)
 	pop();
-	drawGrid();
- 	drawCenter();
+	//drawGrid();
+ 	//drawCenter();
  	stroke(0);
 
  	//charcters behind table
@@ -263,8 +268,52 @@ function backgroundVersion2()
  		characterBacks(0, 0, 255);
  	pop();
 
+ 	//text conversation
+ 	if (count >=130 && count <300)
+ 	{
+ 		//text //purple
+		fill(255);
+		rect(100,250,100,50);
+		fill(0);
+		noStroke();
+		textSize(10);
+		text('I was in the engine \n room, it was not me', 105,270);
+	}
+ 	if (count >=300 && count <450)
+ 	{
+		//text (blue)
+		fill(255);
+	 	rect(200,300,100,50);
+	 	fill(0);
+	 	noStroke();
+	   	textSize(10);
+	   	text('I saw Lime there, \n I think it was him!', 205,320);
+	}
+ 	if (count >=450 && count <600)
+ 	{
+ 		//text(yellow)
+		fill(255);
+		rect(300,150,100,50);
+		fill(0);
+		noStroke();
+		textSize(10);
+		text('Yea, Lime looks sus\n we should eject\n Lime', 305, 170);
+	}
+	if (count >=600 && count <750)
+ 	{
+		//text(lime)
+		fill(255);
+		rect(100,150,100,50);
+		fill(0);
+		noStroke();
+		textSize(10);
+		text('It was not me,\n I left the room!', 105, 170);
+	}
+
 }
 
+
+//player can press button in this background
 function backgroundVersion3()
 {
 	background(50)
@@ -273,8 +322,8 @@ function backgroundVersion3()
 		fill(154, 164, 199);
 		rect(0, 260, 400, 200)
 	pop();
-	drawGrid();
- 	drawCenter();
+	//drawGrid();
+ 	//drawCenter();
  	stroke(0);
 
  	//charcters behind table
@@ -314,39 +363,11 @@ function backgroundVersion3()
  	fill(255);
  	rect(250,0,150,50);
  	fill(0);
-    textSize(20);
-    text('VOTE LIME OUT', 260,10);
+    textSize(18);
+    text('VOTE LIME OUT', 259,27);
 
 
 }
-
-//text (purple)
-//fill(255);
-//rect(150,300,100,50);
-//fill(0);
-//textsize(10);
-//text('I was in the engine room, it wasn't me', 155,310);
-
-//text (blue)
-// 	fill(255);
-// 	rect(200,300,100,50);
-// 	fill(0);
-//   textSize(10);
-//   text('I saw Lime there, I think it was him!', 205,310);
-
-//text(yellow)
-//fill(255);
-//rect(300,150,100,50);
-//fill(0);
-//textSize(10);
-//text('Yea, Lime looks sus let's eject Lime', 305, 160);
-
-//text(yellow)
-//fill(255);
-//rect(100,150,100,50);
-//fill(0);
-//textSize(10);
-//text('It wasn't me, I left the room!', 105, 160);
 
 function mouseClicked()
 {
