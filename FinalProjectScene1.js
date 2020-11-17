@@ -2,11 +2,14 @@ var cyanVisible = true
 var xRed = -100
 var stateC = 2;
 
-var accX = 0;//controls movement
+var accX = 0;//controls  movement of orange character - nick
 var accY = 0;
 
-var nx = 20; //starting postion of the orange character that Nick will update causeing movement
+var nx = 20; //starting postion of the orange character that i will update  for  movement -nick
 var ny = 50;
+
+var unitX = 0;//this controls direction of the movement of orange - nick
+var unitY = 0;
 
 function setup() {
   createCanvas(400, 400);
@@ -263,51 +266,52 @@ function mouseClicked(event)
 		cyanVisible = false;
 	}
 
-function checkKeys()
+function checkKeys() //must check what keys are down before changing variables to allow orange to move - Nick
 {
 	
 	//x movement
 	
 	if (keyIsDown(RIGHT_ARROW))
 	{
-		accX = 1;
+		unitX = 1;
+		accX = .7;
+
 	}
-	else
-	{
-		accX = 0;
-	}
-	if (keyIsDown(LEFT_ARROW))
-	{
-		accX = -1;
-	}
-	else
-	{
-		accX = 0;
-	}
+	else if (keyIsDown(LEFT_ARROW))
+		{
+			unitX = -1;
+			accX = .7; 
+		}
+		else
+		{
+			accX = 0;
+			unitX = 0;
+		}
 
 	//y movement
-	if (keyIsDown(DOWN_ARROW))
-	{
-		accY = 1;
-	}
-	else
-	{
-		accY = 0;
-	}
 	if (keyIsDown(UP_ARROW))
 	{
-		accY = -1;
+		unitY = -1;
+		accY = .7;
+
 	}
-	else
-	{
-		accY = 0;
-	}
+	else if (keyIsDown(DOWN_ARROW))
+		{
+			unitY = 1;
+			accY = .7; 
+		}
+		else
+		{
+			accY = 0;
+			unitY = 0;
+		}
+	
 }
 
-function updateorange()
+function updateorange() //updates orange's variables based on what keys are pressed - nick
 {
-	nx += accX;
-	ny += accY;
+	nx += accX * unitX;
+	ny += accY * unitY;
 }
 
 
@@ -317,10 +321,18 @@ function updateorange()
 function draw() {
 	background(36,50,59)
 	scene();
-	drawCharacter(nx, ny, 255, 128, 0, .7, .7) //this is Nick's character that I want to move
-	// drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
-	checkKeys();
+	
+
+
+	drawCharacter(nx, ny, 255, 128, 0, .7, .7) //this is the character that I want to move - nick
+	checkKeys(); //this clump of 3 functions are what's necessary for movement, just thought I'd specifiy in case you want to mess with them -nick
 	updateorange();
+	
+
+
+
+
+// drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
 	drawCharacter(250, 300, 0, 0, 200, .7, .7)
 	
 	draw_kill_button()
