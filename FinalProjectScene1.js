@@ -333,7 +333,7 @@ function draw() {
 
 
 // drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
-	drawCharacter(250, 300, 0, 0, 200, .7, .7)
+	drawCharacter(250, 300, 69, 249, 56, .7, .7)
 	
 	draw_kill_button()
 
