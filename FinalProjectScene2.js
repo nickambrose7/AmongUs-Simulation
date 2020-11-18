@@ -236,10 +236,10 @@ function backgroundVersion2()
  	stroke(0);
 
  	//charcters behind table
- 	//red
+ 	//blue
  	push();
  		translate(-100, 10);
- 		drawCharacter(255, 0, 0, 1, 1);
+ 		drawCharacter(0, 0, 255, 1, 1);
  	pop();
  	//lime
  	push();
@@ -261,11 +261,11 @@ function backgroundVersion2()
  		scale(1.3)
  		characterBacks(166, 75, 191);
  	pop();
-	//blue
+	//orange
 	push();
  		translate(0, 10);
  		scale(1.3)
- 		characterBacks(0, 0, 255);
+ 		characterBacks(255, 128, 0);
  	pop();
 
  	//text conversation
@@ -327,10 +327,10 @@ function backgroundVersion3()
  	stroke(0);
 
  	//charcters behind table
- 	//red
+ 	//blue
  	push();
  		translate(-100, 10);
- 		drawCharacter(255, 0, 0, 1, 1);
+ 		drawCharacter(0, 0, 255, 1, 1);
  	pop();
  	//lime
  	push();
@@ -352,11 +352,11 @@ function backgroundVersion3()
  		scale(1.3)
  		characterBacks(166, 75, 191);
  	pop();
-	//blue
+	//orange
 	push();
  		translate(0, 10);
  		scale(1.3)
- 		characterBacks(0, 0, 255);
+ 		characterBacks(255, 128, 0);
  	pop();
 
  	//vote Lime Out button
