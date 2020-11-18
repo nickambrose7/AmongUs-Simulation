@@ -1,4 +1,4 @@
-var cyanVisible = true
+var redVisible = true
 var xRed = -100
 var stateC = 2;
 
@@ -10,6 +10,8 @@ var ny = 50;
 
 var unitX = 0;//this controls direction of the movement of orange - nick
 var unitY = 0;
+
+var killVis = false;
 
 function setup() {
   createCanvas(400, 400);
@@ -263,7 +265,7 @@ function drawMoveCharacter(posx, posy, x, y, z, scal1, scal2)
 function mouseClicked(event)
 	{
 	if (mouseX > 320 && mouseX < 375 && mouseY > 320 && mouseY < 380 && xRed == -100)
-		cyanVisible = false;
+		redVisible = false;
 	}
 
 function checkKeys() //must check what keys are down before changing variables to allow orange to move - Nick
@@ -328,20 +330,27 @@ function draw() {
 	checkKeys(); //this clump of 3 functions are what's necessary for movement, just thought I'd specifiy in case you want to mess with them -nick
 	updateorange();
 	
+	if(nx >= 130 && nx <= 250 && ny >= -10 && ny <= 170){
+		killVis = true;
+	}
+	else{
+		killVis = false;
+	}
 
-
+	if(killVis){
+		draw_kill_button();
+	}
 
 
 // drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
-	drawCharacter(250, 300, 69, 249, 56, .7, .7)
+	drawCharacter(250, 300, 69, 249, 56, -.7, .7)
 	
-	draw_kill_button()
+	
 
 	//hover();
 
-	draw_kill_button();
 	
-	if (cyanVisible){
+	if (redVisible){
 		drawCharacter(200, 100, 255, 0, 0, .7, .7)
 	}
 	else{
