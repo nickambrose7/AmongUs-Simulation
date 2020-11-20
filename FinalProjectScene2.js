@@ -54,7 +54,7 @@
 
 
 //Global Variables
-count = 0
+var count = 0;
 //scenechange = false;
 
 function setup() 
@@ -69,7 +69,7 @@ function draw()
 	count ++;
 }
 	
-function backgroundScene()
+function scene2()
 {
 
    if (count < 100)
@@ -122,6 +122,8 @@ function drawCharacter(x, y, z, scal1, scal2)
 		pop();
 	pop();
 }
+
+
 
 //characterbacks
 function characterBacks(x, y, z)

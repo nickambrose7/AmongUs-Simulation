@@ -32,40 +32,126 @@ var count = 0;
 var scenechange = false;
 
 //scene3 vars
+var imposterTextAddTo = ""
+var imposterTextFinal = "Lime was not the Imposter"
+var visibleLetters = 0
+var xBlue = -350
+var xOrange = -280;
+var xYellow = 230;
+var xPurp = 300
+
+// space imposter variables
+var numChars;
+var dx = 1;
+var dfX = 0;
+var dfY = 150;
+var dfRot = [];
+
 
 function setup()
 {
    createCanvas(400, 400);
+
+   numChars = 1
+   //character variables
+   for (var i = 0; i < numChars; i = i + 1)
+   {
+      dfRot.push(PI / random(3, 7))
+   }
 }
 
-function draw()
-{
+function draw(){
+    backgroundScene();
 
-   backgroundScene();
-    
-   drawCharacter(nx, ny, 255, 128, 0, .7, .7) //this is the character that I want to move - nick
-   checkKeys(); //this clump of 3 functions are what's necessary for movement, just thought I'd specifiy in case you want to mess with them -nick
-   updateorange();
-   
-   if(nx >= 130 && nx <= 250 && ny >= -10 && ny <= 170){
-      killVis = true;
-   }
-   else{
-      killVis = false;
-   }
+    if(sceneNum == 2){
+      count++;
+    }
 
-   if(killVis){
-      draw_kill_button();
-   }
+    if(sceneNum == 3){
+      background(50);
+      scene3();
 
-   drawCharacter(lx, ly, 69, 249, 56, -.7, .7)
+      drawSpaceImposter();
+      updateSpaceImposter();
+      coverMistakes();
+      
+      //yellow
+      push();
+         translate(xYellow, 0);
+         if (xYellow > 30)
+         {
+            drawCharacter2(250, 246, 35, -1, 1);
+            xYellow -=1.1
+         }
+         else
+         {
+            push();
+               translate(-35, 0)
+               characterBacks(250, 246, 35);
+            pop();
+         }
+      pop();
 
-   if (redVisible){
-      drawCharacter(200, 100, 255, 0, 0, .7, .7)
-   }
-   else{
-      draw_dead();
-      updatelime();        
+      //purple
+      push();
+         translate(xPurp, 0);
+         if (xPurp > 100)
+         {
+            drawCharacter2(166, 75, 191, -1, 1);
+            xPurp -=1.1
+         }
+         else
+         {
+            push();
+               translate(-35, 0)
+               characterBacks(166, 75, 191);
+            pop();
+         }
+      pop();
+
+      //orange
+      push();
+         translate(xOrange, 0);
+         if (xOrange < -80)
+         {
+            drawCharacter2(255, 128, 0, 1, 1);
+            xOrange += 1.1
+         }
+         else
+         {
+            characterBacks(255, 128, 0);
+         }
+      pop();
+
+      //blue
+      push();
+         translate(xBlue, 0);
+         if (xBlue < -150)
+         {
+            drawCharacter2(0, 0, 255, 1, 1);
+            xBlue += 1.1
+         }
+         else
+         {
+            characterBacks(0, 0, 255);
+         }
+      pop();
+
+
+
+
+      if (dfX > 100)
+      {
+         visibleLetters = (dfX - 100) / 9;
+         imposterTextAddTo = imposterTextFinal.substring(0, visibleLetters);
+         push();
+            textSize(16);
+            strokeWeight(2);
+            stroke(0);
+            fill(255);
+            text(imposterTextAddTo, 100, 150);
+         pop();
+      }
    }
 
 }
@@ -79,7 +165,10 @@ function backgroundScene(){
       scene2();
       sceneNum = 2;
    }
-   //TODO booleans that switch between scenes
+
+   if(sceneNum == 3){
+      scene3();
+   }
 }
 
 function scene2()
@@ -137,6 +226,33 @@ function scene1()
       rect(350, 220, 100, 70)
       rect(398, 220, 50, 70)
    pop();
+
+    
+   drawCharacter(nx, ny, 255, 128, 0, .7, .7) //this is the character that I want to move - nick
+   checkKeys(); //this clump of 3 functions are what's necessary for movement, just thought I'd specifiy in case you want to mess with them -nick
+   updateorange();
+   
+   if(nx >= 130 && nx <= 250 && ny >= -10 && ny <= 170){
+      killVis = true;
+   }
+   else{
+      killVis = false;
+   }
+
+   if(killVis){
+      draw_kill_button();
+   }
+
+   drawCharacter(lx, ly, 69, 249, 56, -.7, .7)
+
+   if (redVisible){
+      drawCharacter(200, 100, 255, 0, 0, .7, .7)
+   }
+   else{
+      draw_dead();
+      updatelime();        
+   }
+
 }
 
 //emergency meeting alert
@@ -147,8 +263,9 @@ function backgroundVersion1()
    push();
       translate(-20,-100)
       stroke(0);
-      drawCharacter(250,246,35,0.8,0.8);
+      drawCharacter2(250,246,35,0.8,0.8);
    pop();
+ 
    //banner
    fill(255,0,0);
    noStroke();
@@ -160,7 +277,6 @@ function backgroundVersion1()
    strokeWeight(2);
    stroke(0,0,255);
    text('EMERGENCY \n MEETING',123,195);
-
 }
 
 //characters conversing who to eject
@@ -180,17 +296,17 @@ function backgroundVersion2()
    //blue
    push();
       translate(-100, 10);
-      drawCharacter(0, 0, 255, 1, 1);
+      drawCharacter2(0, 0, 255, 1, 1);
    pop();
    //lime
    push();
       translate(30, 0);
-      drawCharacter(69, 245, 56, -1, 1);
+      drawCharacter2(69, 245, 56, -1, 1);
    pop();
    // yellow
    push();
       translate(120, 10);
-      drawCharacter(250, 246, 35, -1, 1);
+      drawCharacter2(250, 246, 35, -1, 1);
    pop();
 
    drawTable();
@@ -271,17 +387,17 @@ function backgroundVersion3()
    //blue
    push();
       translate(-100, 10);
-      drawCharacter(0, 0, 255, 1, 1);
+      drawCharacter2(0, 0, 255, 1, 1);
    pop();
    //lime
    push();
       translate(30, 0);
-      drawCharacter(69, 245, 56, -1, 1);
+      drawCharacter2(69, 245, 56, -1, 1);
    pop();
    // yellow
    push();
       translate(120, 10);
-      drawCharacter(250, 246, 35, -1, 1);
+      drawCharacter2(250, 246, 35, -1, 1);
    pop();
 
    drawTable();
@@ -306,9 +422,65 @@ function backgroundVersion3()
    fill(0);
     textSize(18);
     text('VOTE LIME OUT', 259,27);
-
-
 }
+
+//Background function
+function scene3()
+{
+   //ground
+   fill(100);
+   rect(0, 300, 400, 100);
+
+   //window
+   fill(180);
+   rect(40, 40, 320, 220);
+   fill(0);
+   rect(50, 50, 300, 200);
+
+   //stars
+   function drawStars()
+   {
+   fill(255);
+   circle(70, 80, 20);
+   circle(100, 120, 15);
+   circle(130, 200, 10);
+   circle(125, 90, 5);
+   circle(110, 240, 5);
+   circle(114, 180, 5);
+   circle(110, 90, 5);
+   circle(73, 130, 7);
+   }
+
+   drawStars();
+
+   push();
+      translate(300, 45);
+      rotate(PI/2);
+      drawStars();
+   pop();
+
+   push();
+      translate(400, 245);
+      scale(-1);
+      angleMode(degrees);
+      rotate(100);
+      drawStars();
+   pop();
+
+   //extra stars
+   fill(255);
+   circle(70, 230, 6);
+   circle(275, 80, 10);
+   circle(280, 100, 3);
+   circle(175, 220, 7);
+   circle(185, 210, 5);
+   circle(310, 110, 7);
+   circle(307, 120, 10);
+   circle(330, 150, 10);
+   circle(200, 55, 7);
+   circle(210, 65, 4);
+}
+
 
 
 function drawCharacter(posx, posy, x, y, z, scal1, scal2)
@@ -344,6 +516,122 @@ function drawCharacter(posx, posy, x, y, z, scal1, scal2)
       pop();
    pop();
 }
+
+function drawCharacter2(x, y, z, scal1, scal2)
+{
+   push();
+      translate(200, 200)
+      scale(scal1, scal2)
+      fill(x, y, z);
+      //backpack
+      rect(-10, 30, 20, 48, 20, 40, 10, 10);
+      //body
+      rect(0, 0, 50, 80, 20, 40, 10, 10);
+      //legs
+      rect(0, 70, 15, 30, 20, 40, 4, 4);
+      rect(34, 70, 15, 30, 20, 40, 4, 4);
+      push();
+         noStroke();
+         rect(1, 65, 46, 14);
+      pop();
+      //eye thing
+      push();
+         strokeWeight(5);
+         fill(100);
+         rect(12, 13, 40, 20, 6, 10, 10, 7);
+      pop();
+      push();
+         noStroke()
+         fill(150);
+         ellipse(33, 20, 30, 10);
+         fill(200);
+         ellipse(35, 18, 20, 5);
+      pop();
+   pop();
+}
+
+function spaceImposter(x, y, rot)
+{
+   push();
+      translate(x, y);
+      scale(0.5);
+      rotate(rot);
+      fill(69, 245, 56);
+      //backpack
+      rect(-25, -10, 20, 48, 20, 40, 10, 10);
+      //body
+      rect(-25, -40, 50, 80, 20, 40, 10, 10);
+      //legs
+      rect(-25, 30, 15, 30, 20, 40, 4, 4);
+      rect(9, 30, 15, 30, 20, 40, 4, 4);
+      push();
+         noStroke();
+         rect(-24, 25, 46, 14);
+      pop();
+      //eye thing
+      push();
+         strokeWeight(5);
+         fill(100);
+         rect(-13, -27, 40, 20, 6, 10, 10, 7);
+      pop();
+      push();
+         noStroke()
+         fill(150);
+         ellipse(8, -20, 30, 10);
+         fill(200);
+         ellipse(15, -22, 20, 5);
+      pop();
+   pop();
+}
+
+function drawSpaceImposter()
+{
+   for (var i = 0; i < numChars; i = i + 1)
+   {
+      spaceImposter(dfX, dfY, dfRot[i]);
+   }
+}
+
+function updateSpaceImposter()
+{
+   for (var i = 0; i < numChars; i++)
+   {
+      //rotate characters
+      dfRot[i] += PI/40
+
+      //update charcters location
+      dfX += dx;
+
+      // character disappears at x = 350
+      if (dfX >= 350);
+      {
+         ejectOn = false;
+      }
+   }
+}
+
+function coverMistakes()
+{
+//window edge
+push();
+   fill(180);
+   noStroke();
+   rect(40, 41, 10, 200);
+   rect(350, 41, 10, 200);
+   //darker parts
+   fill(50);
+   rect(0, 0, 40, 200);
+   rect(0, 0, 400, 40);
+   rect(360, 40, 100, 200);
+pop();
+//left frame
+line(40, 40, 40, 240)
+line(50, 50, 50, 250)
+//right frame
+line(360, 40, 360, 240)
+line(350, 50, 350, 250)
+}
+
 
 //kill button (skull) on bottom right that will be clickable
    function draw_kill_button()
@@ -432,14 +720,14 @@ function drawCharacter(posx, posy, x, y, z, scal1, scal2)
          translate(237, 123);
          fill(230);
          rotate(PI/8);
-         ellipse(0, 0, 10, 13, 10, 10, 10, 10);
+         ellipse(0, 0, 10, 13, 10);
       pop();
 
       push();
          translate(237, 133);
          fill(230);
          rotate(-PI/4);
-         ellipse(0, 0, 10, 13, 10, 10, 10, 10);
+         ellipse(0, 0, 10, 13, 10);
       pop();
 
       //bone cover up
@@ -531,16 +819,21 @@ function drawTable()
 function mouseClicked(event)
    {
       //TODO: add scene boolean check
-      if (mouseX > 320 && mouseX < 375 && mouseY > 320 && mouseY < 380 && xRed == -100){
-         redVisible = false;
+      if(sceneNum == 1){
+         if (mouseX > 320 && mouseX < 375 && mouseY > 320 && mouseY < 380 && xRed == -100){
+            redVisible = false;
+         }
       }
 
       //scene change to scene 3 if you click the "Vote Lime Out" button
-      
-      if (mouseX > 250 && mouseX < 400 && mouseY > 0 && mouseY < 50)
-      {
-      //scenechange = true;
-       }
+      if(sceneNum == 2){
+         if (mouseX > 250 && mouseX < 400 && mouseY > 0 && mouseY < 50)
+         {
+            ly = 0;
+            sceneNum = 3;
+            console.log("scene" + sceneNum);
+         }
+      }
    }
 
 function checkKeys() //must check what keys are down before changing variables to allow orange to move - Nick
