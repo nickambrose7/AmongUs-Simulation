@@ -71,9 +71,11 @@ function draw()
 }
 
 function backgroundScene(){
-   scene1();
+   if(sceneNum == 1){
+      scene1();
+   }
 
-   if(ly == 160){
+   else if(ly == 160){
       scene2();
       sceneNum = 2;
    }
