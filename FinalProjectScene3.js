@@ -266,12 +266,12 @@ function draw()
 		translate(xRed, 0);
 		if (xRed < -80)
 		{
-			drawCharacter(255, 0, 0, 1, 1);
+			drawCharacter(255, 128, 0, 1, 1);
 			xRed += 1.1
 		}
 		else
 		{
-			characterBacks(255, 0, 0);
+			characterBacks(255, 128, 0);
 		}
 	pop();
 
