@@ -4,7 +4,7 @@ var imposterTextAddTo = ""
 var imposterTextFinal = "Lime was not the Imposter"
 var visibleLetters = 0
 var xBlue = -350
-var xRed = -280;
+var xOrange = -280;
 var xYellow = 230;
 var xPurp = 300
 
@@ -261,13 +261,13 @@ function draw()
 		}
 	pop();
 
-	//red
+	//orange
 	push();
 		translate(xRed, 0);
-		if (xRed < -80)
+		if (xOrange < -80)
 		{
 			drawCharacter(255, 128, 0, 1, 1);
-			xRed += 1.1
+			xOrange += 1.1
 		}
 		else
 		{
