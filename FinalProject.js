@@ -35,7 +35,7 @@ function draw()
 
 function backgroundScene(){
    backgroundVersion1();
-
+ //hello group
 
 
 }
