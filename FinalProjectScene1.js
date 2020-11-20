@@ -90,8 +90,6 @@ function drawCharacter(posx, posy, x, y, z, scal1, scal2)
 	pop();
 }
 
-
-
 //kill button (skull) on bottom right that will be clickable
 	function draw_kill_button()
 	{
@@ -120,30 +118,6 @@ function drawCharacter(posx, posy, x, y, z, scal1, scal2)
 	pop();
 	}
 
-/*function hover()
-	{
-		if (mouseX > 320 && mouseX < 375 && mouseY > 320 && mouseY < 380 && xRed == -100)
-			draw_knife();
-	}
-
-//knife
-	function draw_knife()
-	{
-		push();
-			translate(200, 200);
-			//handle
-			fill(87, 60, 34);
-			quad(-3, 0, 7, -10, 6, -5, -3, 5);
-			//blade
-			translate(7, -8);
-			fill(156, 156, 154);
-			if(cyanVisible)
-				stroke(0);
-			else
-				stroke(255,0,0);
-			quad(-3, 1, 10, -10, 8, 0, -3, 5);
-		pop();
-	}*/
 
 //dead body
 	function draw_dead(){
@@ -289,12 +263,9 @@ function updatelime()
 
 }
 
-
-
 function draw() {
 	background(36,50,59)
 	scene();
-	
 
 
 	drawCharacter(nx, ny, 255, 128, 0, .7, .7) //this is the character that I want to move - nick
@@ -312,25 +283,15 @@ function draw() {
 		draw_kill_button();
 	}
 
-	
 	drawCharacter(lx, ly, 69, 249, 56, -.7, .7)
-	
-	
 
-	//hover();
-
-	
 	if (redVisible){
 		drawCharacter(200, 100, 255, 0, 0, .7, .7)
-
 	}
 	else{
 		draw_dead();
-		updatelime();
-				
+		updatelime();			
 	}
-
-
 }
 
 
