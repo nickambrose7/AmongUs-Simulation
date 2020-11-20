@@ -263,7 +263,7 @@ function draw()
 
 	//orange
 	push();
-		translate(xRed, 0);
+		translate(xOrange, 0);
 		if (xOrange < -80)
 		{
 			drawCharacter(255, 128, 0, 1, 1);
