@@ -75,7 +75,7 @@ function backgroundScene(){
       scene1();
    }
 
-   else if(ly == 160){
+   if(ly == 160){
       scene2();
       sceneNum = 2;
    }
