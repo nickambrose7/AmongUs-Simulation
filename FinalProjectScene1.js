@@ -1,6 +1,5 @@
-var redVisible = true
-var xRed = -100
-var stateC = 2;
+var redVisible = true; // red character is visible - murat
+var xRed = -100 
 
 var accX = 0;//controls  movement of orange character - nick
 var accY = 0;
@@ -8,16 +7,20 @@ var accY = 0;
 var nx = 20; //starting postion of the orange character that i will update  for  movement -nick
 var ny = 50;
 
+var lx = 250; // starting position of the lime character -murat
+var ly = 300;
+
 var unitX = 0;//this controls direction of the movement of orange - nick
 var unitY = 0;
 
-var killVis = false;
+var killVis = false; //kill button is visible - murat
+var moveLime = false; // lime start
 
 function setup() {
   createCanvas(400, 400);
 }
 
-function scene(){
+function scene(){ //draws hallways - murat
 	push();
 	  	strokeWeight(3);
 		//left hall	
@@ -87,49 +90,7 @@ function drawCharacter(posx, posy, x, y, z, scal1, scal2)
 	pop();
 }
 
-function drawMoveCharacter(posx, posy, x, y, z, scal1, scal2)
-{
-	push();
-		translate(posx, posy)
-		scale(scal1, scal2)
-		fill(x, y, z);
-		//backpack
-		rect(-10, 30, 20, 48, 20, 40, 10, 10);
-		//body
-		rect(0, 0, 50, 80, 20, 40, 10, 10);
-		//leg movement states
-		if(stateC == 1){
-			rect(0, 70, 15, 30, 20, 40, 4, 4);
-			rect(34, 70, 15, 30, 20, 40, 4, 4);
-		}
-		else if(stateC == 2){
-			rect(0, 70, 15, 30, 20, 40, 4, 4);
-			push();
-				rect(34, 70, 15, 30, 20, 40, 4, 4);
-				rotate(PI/2)
-			pop();
-		}
 
-		
-		push();
-			noStroke();
-			rect(1, 65, 46, 14);
-		pop();
-		//eye thing
-		push();
-			strokeWeight(5);
-			fill(100);
-			rect(12, 13, 40, 20, 6, 10, 10, 7);
-		pop();
-		push();
-			noStroke()
-			fill(150);
-			ellipse(33, 20, 30, 10);
-			fill(200);
-			ellipse(35, 18, 20, 5);
-		pop();
-	pop();
-}
 
 //kill button (skull) on bottom right that will be clickable
 	function draw_kill_button()
@@ -316,7 +277,17 @@ function updateorange() //updates orange's variables based on what keys are pres
 	ny += accY * unitY;
 }
 
+function updatelime()
+{
+	if(lx > 230){
+		lx--
+	}
 
+	if(lx == 230 && ly > 160){
+		ly--
+	}
+
+}
 
 
 
@@ -341,9 +312,8 @@ function draw() {
 		draw_kill_button();
 	}
 
-
-// drawMoveCharacter(20, 50, 0, 200, 0, .7, .7)
-	drawCharacter(250, 300, 69, 249, 56, -.7, .7)
+	
+	drawCharacter(lx, ly, 69, 249, 56, -.7, .7)
 	
 	
 
@@ -352,10 +322,15 @@ function draw() {
 	
 	if (redVisible){
 		drawCharacter(200, 100, 255, 0, 0, .7, .7)
+
 	}
 	else{
 		draw_dead();
+		updatelime();
+				
 	}
+
+
 }
 
 
